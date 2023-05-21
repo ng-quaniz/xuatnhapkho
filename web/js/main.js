@@ -64,17 +64,7 @@ function toggleElementVisibility(elementSelector) {
       document.getElementById('data1Input').value = selectedData.data1;
       document.getElementById('data2Input').textContent = selectedData.data2;
        document.getElementById('data3Input').textContent = selectedData.data3;
-      document.getElementById('data4Input').value = selectedData.data4;
-      
-       // Lấy phần tử <p> bằng id
-    var dataParagraph = document.getElementById('dataParagraph');
-
-    // Dữ liệu cần hiển thị
-    var data = "Dữ liệu mẫu";
-
-    // Hiển thị dữ liệu vào phần tử <p>
-    dataParagraph.textContent = data;
-
+      document.getElementById('data4Input').value = selectedData.data1;
     }
     
  

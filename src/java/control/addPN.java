@@ -35,7 +35,7 @@ public class addPN extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         DAO dao = new DAO();
         dao.insertPN();
-        String idCT = request.getParameter("idCT");
+        String idCT = request.getParameter("id_ct");
         int idCTInt = Integer.parseInt(idCT);
         String idkhu = request.getParameter("idkhu");
         String ghichu = "";

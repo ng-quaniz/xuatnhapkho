@@ -9,10 +9,36 @@ package entity;
  * @author ng782
  */
 public class Kho {
-    private int id;
-    private String name;
-    private String image;
-    private double price;
-    private String title;
-    private String description;
+    private String kho;
+    private String khu;
+
+    public Kho(){}
+
+    public Kho(String kho, String khu) {
+        this.kho = kho;
+        this.khu = khu;
+    }
+
+    public String getKho() {
+        return kho;
+    }
+
+    public void setKho(String kho) {
+        this.kho = kho;
+    }
+
+    public String getKhu() {
+        return khu;
+    }
+
+    public void setKhu(String khu) {
+        this.khu = khu;
+    }
+
+    @Override
+    public String toString() {
+        return "Kho{" + "kho=" + kho + ", khu=" + khu + '}';
+    }
+    
+    
 }

@@ -5,6 +5,7 @@
 package dao;
 
 import context.DBContext;
+import entity.DHNK;
 import entity.Donhang;
 import entity.Loai;
 import entity.Nguoi;
@@ -62,6 +63,34 @@ public class DAO {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(4)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+       }
+       
+              public List<DHNK> getAllDonhangNK() {
+        List<DHNK> list = new ArrayList<>();
+        String query = "select ct.idCT, tenHang, tenLoai, ngayNhap, tenKho, tenKhu\n" +
+"from ctphieunhap ctpn\n" +
+"inner join phieunhap pn on ctpn.idPN = pn.idPN\n" +
+"inner join chitiet ct on ctpn.idCT = ct.idCT\n" +
+"inner join hanghoa hh on ct.idHH = hh.idHH\n" +
+"inner join loaihanghoa lh on hh.idLoai = lh.idLoai\n" +
+"inner join khu k on ctpn.idkhu = k.idkhu\n" +
+"inner join kho kh on k.idkho = kh.idkho\n"+
+"order by idCT asc";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new DHNK (rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6)));
             }
         } catch (Exception e) {
         }

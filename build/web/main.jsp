@@ -2,6 +2,7 @@
 <%@page import="java.util.*"%>
 <%@ page import="entity.Nguoi" %>
 <%@ page import="entity.Donhang" %>
+<%@ page import="entity.DHNK" %>
 <%@page import="java.util.*"%>
 <%@ page import="entity.Loai" %>
 <%@ page import="dao.DAO" %>
@@ -168,10 +169,10 @@
                             <div class="accordion-body">
                                 <div class="GoodsForm">
                                     <form action="addPN" class="row g-2" method="post">
-                                        <p class="title_formAccor">Thông Tin Kho(MDH: <input name="idCT" id="data1Input" class="no-border" vlaue="" disabled>)</p>
+                                        <p class="title_formAccor">Nhập kho(MDH: <input name="id_ct" type="text" id="data1Input" class="no-border">)</p>
                                     <div class="col-md-4">
                                       <p class="title_address">Kho:</p>
-                                      <select class="form-select " id="parentDropdown">
+                                      <select class="form-select " id="parentDropdown" required>
                                         <option selected disabled value="">Vị trí kho:</option>
                                         <option value="A">Ngoai_troi_A</option>
                                         <option value="B">Trong_nha_B</option>
@@ -180,7 +181,7 @@
                                     </div>
                                     <div class="col-md-4">
                                       <p class="title_address">Khu:</p>
-                                      <select name="idkhu" class="form-select " id="childDropdown">
+                                      <select name="idkhu" class="form-select " id="childDropdown" required>
                                       </select>
                                     </div>
                                     <div class="form-floating">
@@ -335,14 +336,17 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">KH001</th>
-                          <td>Lê Na</td>
-                          <td>Hàng Gia Dụng</td>
-                          <td>12/05/2023</td>
-                          <td>Hàng Gia Dụng</td>
+                          <%
+                            List<DHNK> listNK = dao.getAllDonhangNK();
+                            for(DHNK n : listNK) {%>
+                        <tr onclick="selectRow(this)">
+                          <td scope="row"><%=n.getId()%></td>
+                          <td><%=n.getTen()%></td>
+                          <td><%=n.getLoai()%></td>
+                          <td><%=n.getKho()%>/<%=n.getKhu()%></td>
+                          <td><%=n.getNgaytao()%></td>
                         </tr>
- 
+                      <%};%>
                       </tbody>
                     </table>
                   </table>
@@ -380,65 +384,20 @@
                             <div class="accordion-body">
                                     <div class="receiverForm">
                                       <form action="" class="row g-6" id="FormExport_Receiver">
-                                        <p class="title_formAccor">Thông tin người nhận :</p>
+                                          <p class="title_formAccor">Xuất Kho(MDH: <input name="id_ctxk" type="text" id="data4Input" class="no-border">)</p>
                                         <div class="col-md-3">
-                                          <label for="validationReceiverName" class="form-label">Tên:</label>
-                                          <div class="input-group has-validation">
-                                            <input type="text" class="form-control "placeholder="Le Na" id="input_nameReceiver" required>
+                                          <label for="validationReceiverName" class="form-label">Hình thức</label>
+                                          <div class="input-group has-validation" required>
+                                              <select name="HT" class="form-select">
+                                                  <option selected disabled value="value">Vận chuyển</option>
+                                                  <option value="value">Nhận ngay</option>
+                                              </select>
                                           </div>
                                         </div>
-                                        <div class="col-md-3">
-                                          <label for="validationReceiverCCCD" class="form-label">Số CCCD/CMND:</label>
-                                          <div class="input-group has-validation">
-                                            <input type="text" class="form-control "placeholder="0102030" id="input_CCCDReceiver" required>
-                                          </div>
-                                        </div>
-                
-                                        <div class="col-md-3">
-                                          <label for="validationReceiverPhone" class="form-label">Số Điện Thoại:</label>
-                                          <div class="input-group has-validation">
-                                            <input type="text" class="form-control "placeholder="012345678" id="input_gmailReceiver" required>
-                                          </div>
-                                        </div>
-                                    
-                                        <div class="col-md-3">
-                                          <label for="validationNameReceiverGmail" class="form-label">Email:</label>
-                                          <input type="text" class="form-control " id="input_gmailReceiver" placeholder="abc@gmail.com" required>
-                                        </div>
-                                        <p class="title_address">Địa chỉ:</p>
-                                        <div class="col-md-3">
-                                          <select class="form-select" id="selectCity" required>
-                                            <option selected disabled value="">Tỉnh Thành:</option>
-                                            <option>Đà Nẵng</option>
-                                            <option>Hà Nội</option>
-                                            <option>Tp.Hồ Chí Minh</option>
-                                            <option>Quảng Nam</option>
-                                          </select>
-                                        </div>
-                
-                                        <div class="col-md-3">
-                                          <select class="form-select" id="selectDistrict" required>
-                                            <option selected disabled value="">Quận Huyện:</option>
-                                            <option>Hải Châu</option>
-                                            <option>Liên chiểu</option>
-                                            <option>Cẩm Lệ</option>
-                                            <option>Hoà Vang</option>
-                                          </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                          <select class="form-select" id="selectVillage" required>
-                                            <option selected disabled value="">Phường Xã:</option>
-                                            <option>Thanh Bình</option>
-                                            <option>Hoà Khánh Bắc</option>
-                                            <option>Hoà Khánh Nam</option>
-                                            <option>Thuận Phước</option>
-                                          </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                          <div class="input-group has-validation">
-                                            <input type="text" class="form-control "placeholder="48 Cao Thắng" id="inputNumberAddress" required>
-                                          </div>
-                                        </div>
+                                        <div class="btn_AddOrder">
+                                                    <button class="btn btn-dark button1" id="closeXK">Hủy</button>
+                                                  <button class="btn btn-primary button2">Xuất Kho</button>
+                                                </div>
                                       </form>
                               </div>
                             </div>
@@ -549,10 +508,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="btn_AddOrder">
-                        <button class="btn btn-dark button1" id="closeXK">Hủy</button>
-                      <button class="btn btn-primary button2">Xuất Kho</button>
                     </div>
                   </div>
                 </div>

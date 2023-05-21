@@ -266,3 +266,15 @@ END;
 //           
 
 DELIMITER ;
+
+select ct.idCT, tenHang, tenLoai, tenKho, tenKhu, ngayNhap
+from ctphieunhap ctpn
+inner join phieunhap pn on ctpn.idPN = pn.idPN
+inner join chitiet ct on ctpn.idCT = ct.idCT
+inner join hanghoa hh on ct.idHH = hh.idHH
+inner join loaihanghoa lh on hh.idLoai = lh.idLoai
+inner join khu k on ctpn.idkhu = k.idkhu
+inner join kho kh on k.idkho = kh.idkho
+where idTT = "NK"
+
+
