@@ -61,7 +61,7 @@
                         <%  DAO dao = new DAO(); 
                             List<Donhang> listD = dao.getAllDonhang();
                             for(Donhang d : listD) {%>
-                      <tr>
+                            <tr onclick="(navigateToLink('loadCT?id=<%=d.getId()%>'))"">
                         <th scope="row"><%=d.getId()%></th>
                         <td><%=d.getTen()%></td>
                         <td><%=d.getLoai()%></td>
@@ -116,8 +116,8 @@
                           <th scope="col">Mã đơn hàng</th>
                           <th scope="col">Tên Đơn hàng</th>
                           <th scope="col">Loại hàng hoá</th>
+                          <th scope="col">Cân nặng</th>
                           <th scope="col">Ngày</th>
-                          <th scope="col">Ghi chú</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -128,8 +128,8 @@
                           <td scope="row"><%=d.getId()%></td>
                           <td><%=d.getTen()%></td>
                           <td><%=d.getLoai()%></td>
-                          <td><%=d.getNgaytao()%></td>
                           <td><%=d.getTrangthai()%></td>
+                          <td><%=d.getNgaytao()%></td>
                         </tr>                      
                         <%};%>
                       </tbody>
@@ -190,7 +190,7 @@
                                     </div>
                                     <div class="btn_AddOrder">
                                       <button id="closeNK" class="btn btn-dark button1" >Hủy</button>
-                                      <input type="submit" class="btn btn-primary button2" value="Nhakho">
+                                      <input type="submit" class="btn btn-primary button2" value="Nhập kho">
                                     </div>
                                   </form>
                                 </div>
@@ -298,7 +298,7 @@
                                           <tr>
                                             <td id="data2Input"></td>
                                             <td id="data3Input"></td>
-                                            <td>...</td>
+                                            <td id="data5Input"></td>
                                             <td>...</td>
                                           </tr>
                                         </tbody>
@@ -383,22 +383,23 @@
                         <div class="accordion-item">
                             <div class="accordion-body">
                                     <div class="receiverForm">
-                                      <form action="" class="row g-6" id="FormExport_Receiver">
-                                          <p class="title_formAccor">Xuất Kho(MDH: <input name="id_ctxk" type="text" id="data4Input" class="no-border">)</p>
+                                        <form action="addXK" method="post" class="row g-2" >
+                                          <p class="title_formAccor">Xuất Kho(MDH:<input name="id_ctpx" type="text" id="data4Input" class="no-border"> )</p>
                                         <div class="col-md-3">
                                           <label for="validationReceiverName" class="form-label">Hình thức</label>
-                                          <div class="input-group has-validation" required>
+                                          <div class="input-group " required>
                                               <select name="HT" class="form-select">
-                                                  <option selected disabled value="value">Vận chuyển</option>
-                                                  <option value="value">Nhận ngay</option>
+                                                  <option selected value="Vận chuyển">Vận chuyển</option>
+                                                  <option value="Nhận ngay">Nhận ngay</option>
                                               </select>
                                           </div>
                                         </div>
-                                        <div class="btn_AddOrder">
-                                                    <button class="btn btn-dark button1" id="closeXK">Hủy</button>
-                                                  <button class="btn btn-primary button2">Xuất Kho</button>
+                                           <div class="btn_AddOrder">
+                                                   <div  id="closeXK" class="btn btn-dark button1">Hủy</div>
+                                                  <input type="submit" class="btn btn-primary button2" value="Xuất Kho">
                                                 </div>
                                       </form>
+  
                               </div>
                             </div>
                             <div class="accordion-item">
@@ -496,10 +497,10 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <th>...</th>
-                                            <td>...</td>
-                                            <td>...</td>
-                                            <td>...</td>
+                                            <th id="data6Input">...</th>
+                                            <td id="data7Input">...</td>
+                                            <td id="data8Input">...</td>
+                                            <td id="data9Input">...</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -525,7 +526,7 @@
                           <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                             <div class="accordion-body">
                               <div class="sender_form">
-                                <form action="" class="row g-6">
+                                <form action="addD" method="post" class="row g-6"  >
                                   <p class="title_formAccor">Thông Tin Khách Hàng :</p>
                                   <div class="col-md-3">
                                     <label for="validationSenderName" class="form-label">Tên khách hàng:</label>
@@ -556,7 +557,7 @@
                                   <div class="col-md-3">
                                     <select class="form-select" id="selectCity" required>
                                     
-                                      <option selected disabled value="">Đà Nẵng</option>
+                                      <option selected value="">Đà Nẵng</option>
                                       <option>Hà Nội</option>
                                       <option>Tp.Hồ Chí Minh</option>
                                       <option>Quảng Nam</option>
@@ -565,8 +566,8 @@
   
                                   <div class="col-md-3">
                                     <select class="form-select" id="selectDistrict" required>
-                                      <option selected disabled value="">Quận Huyện:</option>
-                                      <option>Hải Châu</option>
+           
+                                      <option selected>Hải Châu</option>
                                       <option>Liên chiểu</option>
                                       <option>Cẩm Lệ</option>
                                       <option>Hoà Vang</option>
@@ -575,8 +576,8 @@
   
                                   <div class="col-md-3">
                                     <select class="form-select" id="selectVillage" required>
-                                      <option selected disabled value="">Phường Xã:</option>
-                                      <option>Thanh Bình</option>
+                               
+                                      <option selected>Thanh Bình</option>
                                       <option>Hoà Khánh Bắc</option>
                                       <option>Hoà Khánh Nam</option>
                                       <option>Thuận Phước</option>
@@ -612,15 +613,16 @@
                                       <input name="add_cannang" type="text" class="form-control "placeholder="" id="input_gmailReceiver" required>
                                     </div>
                                   </div>
+                                    <div class="btn_AddOrder">
+                                        <input type="submit" class="btn btn-primary"  value="Tạo Đơn">
+                                        </div>
                                 </form>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="btn_AddOrder">
-                        <input type="submit" class="btn btn-primary" onclick="handleSubmit()" value="Tạo Đơn">
-                      </div>
+                      
                     </div>
                   </div>
                 </div>

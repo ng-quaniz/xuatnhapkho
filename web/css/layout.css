@@ -476,9 +476,7 @@ html { font-size: 16px; }
     };
 } */
 .a{
-    border:0.5px solid rgb(208, 208, 208);
-    border-radius: 10px;
-    padding-block: 20px;
+   
     width: 75%;
 
 }
@@ -490,4 +488,21 @@ html { font-size: 16px; }
         outline: none;
         width: 35px;
 }
-      
+     
+.e{
+    display:  flex;
+    justify-content: center;
+    width: 65%;
+
+}
+
+.b{
+    text-align: center;
+}
+.c{
+    display: flex;
+    justify-content: space-between
+}
+.d{
+    color: #000;
+}

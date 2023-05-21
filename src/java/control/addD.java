@@ -34,16 +34,17 @@ public class addD extends HttpServlet {
         String hloai = request.getParameter("add_loaih");
         String hname = request.getParameter("add_tenh");
         String hcan = request.getParameter("add_cannang");
-        String htt = "CD";
+        String htt = "DD";
         String hgch = "";
-//        String kname = request.getParameter("add_tenk");
-//        String ksdt = request.getParameter("add_sdtk");
-//        String kcmnd = request.getParameter("add_cmndk");
-//        String kemail = request.getParameter("add_emailk");
-//        String kdiachi = request.getParameter("add_dchik");
+        String kname = request.getParameter("add_tenk");
+        String ksdt = request.getParameter("add_sdtk");
+        String kcmnd = request.getParameter("add_cmndk");
+        String kemail = request.getParameter("add_emailk");
+        String kdiachi = request.getParameter("add_dchik");
+        int idloai = Integer.parseInt(hloai);
         DAO dao = new DAO();
-        dao.insertHang(hloai, hname, hcan, htt, hgch);
-//        dao.insertKH(kname, ksdt, kcmnd, kemail, kdiachi);
+        dao.insertHang(idloai, hname, hcan, htt, hgch);
+        dao.insertKH(kname, ksdt, kcmnd, kemail, kdiachi);
         response.sendRedirect("main.jsp");
         }
 

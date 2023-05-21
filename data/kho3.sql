@@ -48,10 +48,10 @@
   ON DELETE CASCADE
   ON UPDATE CASCADE
 );
-create table chitiet (
+ create table chitiet (
 	idCT int not null AUTO_INCREMENT,
   idHH int not null,
-  idKH int not null,
+  idKH int null,
   idNV int,
   ngaytao datetime,
   PRIMARY KEY (idCT),
@@ -220,8 +220,8 @@ values ("AA,Khu AA",1),
 ("CC,Khu CC",3),
 
 
-
-
+--thêm vào chi tiết sau khi thêm hàng hóa
+DELIMITER //
 CREATE TRIGGER insert_chitiet 
 AFTER INSERT ON hanghoa
 FOR EACH ROW
@@ -231,7 +231,7 @@ BEGIN
 END//
 DELIMITER ;
 
-
+--update chi tiết sau khi thêm khách hàng
 DELIMITER //
 
 CREATE TRIGGER insert_chitiet_KH 
@@ -244,7 +244,7 @@ DELIMITER ;
 
 
 DELIMITER //
-
+--thêm vào ct phiếu nhập sau khi thêm phiếu nhập
 create TRIGGER insert_ctphieunhap
 AFTER INSERT ON phieunhap
 FOR EACH ROW
@@ -254,7 +254,7 @@ END;
 //
 DELIMITER ;
 
-
+--update trạng thái hàng hóa sau khi update ct phiếu nhập
 DELIMITER //
 
 CREATE TRIGGER update_idTT
@@ -266,15 +266,25 @@ END;
 //           
 
 DELIMITER ;
+--thêm vào ct phiếu xuất sau khi thêm phiếu xuất
+DELIMITER //
+create TRIGGER insert_ctphieuxuat
+AFTER INSERT ON phieuxuat
+FOR EACH ROW
+BEGIN
+  INSERT INTO ctphieuxuat (idPX, idCT, hinhthuc) VALUES (NEW.idPX, NULL, "");
+END;
+//
+DELIMITER ;
+--update trạng thái hàng hóa sau khi update ct phiếu xuất
+DELIMITER //
 
-select ct.idCT, tenHang, tenLoai, tenKho, tenKhu, ngayNhap
-from ctphieunhap ctpn
-inner join phieunhap pn on ctpn.idPN = pn.idPN
-inner join chitiet ct on ctpn.idCT = ct.idCT
-inner join hanghoa hh on ct.idHH = hh.idHH
-inner join loaihanghoa lh on hh.idLoai = lh.idLoai
-inner join khu k on ctpn.idkhu = k.idkhu
-inner join kho kh on k.idkho = kh.idkho
-where idTT = "NK"
+CREATE TRIGGER update_idTT_XK
+AFTER UPDATE ON ctphieuxuat
+FOR EACH ROW
+BEGIN
+  UPDATE hanghoa SET idTT = "XK" WHERE idHH = (SELECT idHH FROM chitiet WHERE idCT = NEW.idCT);
+END;
+//           
 
-
+DELIMITER ;

@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -50,8 +50,8 @@ public class DAO {
       
        public List<Donhang> getAllDonhangDD() {
         List<Donhang> list = new ArrayList<>();
-        String query = "select chitiet.idCT, hanghoa.tenHang, loaihanghoa.tenLoai, chitiet.ngaytao \n" +
-"from chitiet, hanghoa, loaihanghoa where chitiet.idHH=hanghoa.idHH and hanghoa.idLoai=loaihanghoa.idLoai and hanghoa.idTT=\"DD\"\n"+
+        String query = "select chitiet.idCT, hanghoa.tenHang, loaihanghoa.tenLoai, chitiet.ngaytao, hanghoa.cannang \n" +
+"from chitiet, hanghoa, loaihanghoa where chitiet.idHH=hanghoa.idHH and hanghoa.idLoai=loaihanghoa.idLoai and hanghoa.idTT=\"DD\"\n" +
 "order by idCT asc";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
@@ -61,7 +61,7 @@ public class DAO {
                 list.add(new Donhang (rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getString(4),
+                        rs.getString(5),
                         rs.getString(4)));
             }
         } catch (Exception e) {
@@ -71,14 +71,15 @@ public class DAO {
        
               public List<DHNK> getAllDonhangNK() {
         List<DHNK> list = new ArrayList<>();
-        String query = "select ct.idCT, tenHang, tenLoai, ngayNhap, tenKho, tenKhu\n" +
+        String query = "select ct.idCT, tenHang, tenLoai, ngayNhap ,tenKho, tenKhu\n" +
 "from ctphieunhap ctpn\n" +
 "inner join phieunhap pn on ctpn.idPN = pn.idPN\n" +
 "inner join chitiet ct on ctpn.idCT = ct.idCT\n" +
 "inner join hanghoa hh on ct.idHH = hh.idHH\n" +
 "inner join loaihanghoa lh on hh.idLoai = lh.idLoai\n" +
 "inner join khu k on ctpn.idkhu = k.idkhu\n" +
-"inner join kho kh on k.idkho = kh.idkho\n"+
+"inner join kho kh on k.idkho = kh.idkho\n" +
+"where idTT = \"NK\"\n" +
 "order by idCT asc";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
@@ -97,14 +98,14 @@ public class DAO {
         return list;
        }
        
-       public void insertHang(String loai, String name, String kg, String tt, String gchu) {
+       public void insertHang(int loai, String name, String kg, String tt, String gchu) {
         String query = "INSERT INTO `hanghoa` \n" +
 "(`idLoai`, `tenHang`, `cannang`, `idTT`, `ghichu`)\n" +
 "VALUES (?, ?, ?, ?, ?)";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
-            ps.setString(1, loai);
+            ps.setInt(1, loai);
             ps.setString(2, name);
             ps.setString(3, kg);
             ps.setString(4, tt);
@@ -195,5 +196,118 @@ public class DAO {
         }
     }
 
+                        public void insertPX() {
+        String query = "INSERT INTO kho.phieuxuat (ngayxuat, idNV)\n" +
+"          VALUES (NOW(), 1)";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+                        
+            public void insertCTPX(int idCT, String hinhthuc) {
+        String query = "UPDATE ctphieuxuat SET idCT = ?, hinhthuc  = ? WHERE idCT is NULL";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, idCT);
+            ps.setString(2, hinhthuc);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
  
+            
+            public Nguoi getKHByID(String id) {
+        List<Nguoi> list = new ArrayList<>();
+        String query = "select khachhang.idKH, khachhang.tenKhachHang, khachhang.sdt, khachhang.cmnd, khachhang.email, khachhang.diachi\n" +
+"from khachhang, chitiet\n" +
+"where khachhang.idKH = chitiet.idKH and chitiet.idCT = ?";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+               return new Nguoi(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+            }
+            
+                        public Donhang getHHByID(String id) {
+
+        String query = "select hanghoa.idHH, hanghoa.tenHang, loaihanghoa.tenLoai, trangthai.trangthai, hanghoa.cannang, hanghoa.ghichu\n" +
+"from hanghoa, chitiet, loaihanghoa, trangthai\n" +
+"where hanghoa.idHH = chitiet.idHH and hanghoa.idLoai = loaihanghoa.idLoai and hanghoa.idTT = trangthai.idTT  and chitiet.idCT = ?";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+               return new Donhang(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+            }
+                        
+    public DHNK getPNByID(String id) {
+
+        String query = "select phieunhap.idPN, kho.tenKho, khu.tenkhu, phieunhap.ngaynhap, nhanvien.tenNV\n" +
+"from phieunhap, kho, khu, nhanvien, ctphieunhap, chitiet\n" +
+"where phieunhap.idPN = ctphieunhap.idPN and ctphieunhap.idkhu = khu.idkhu and khu.idkho = kho.idkho \n" +
+"  and phieunhap.idNV = nhanvien.idNV and ctphieunhap.idCT = chitiet.idCT and chitiet.idCT = ?";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+               return new DHNK(rs.getInt(1),
+                        rs.getString(5),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(2),
+                rs.getString(3));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+            }
+    public Donhang getPXByID(String id) {
+
+        String query = "select phieuxuat.idPX, ctphieuxuat.hinhthuc, phieuxuat.ngayxuat, nhanvien.tenNV\n" +
+"from phieuxuat, ctphieuxuat, chitiet, nhanvien\n" +
+"where phieuxuat.idPX = ctphieuxuat.idPX and ctphieuxuat.idCT = chitiet.idCT and chitiet.idNV = nhanvien.idNV and chitiet.idCT = ?";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+               return new Donhang (rs.getInt(1),
+                        rs.getString(4),
+                        rs.getString(2),
+                        rs.getString(4),
+                        rs.getString(3));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+            }
 }
