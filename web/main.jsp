@@ -557,7 +557,7 @@
                                   <div class="col-md-3">
                                     <select class="form-select" id="selectCity" required>
                                     
-                                      <option selected value="">Đà Nẵng</option>
+                                      <option selected>Đà Nẵng</option>
                                       <option>Hà Nội</option>
                                       <option>Tp.Hồ Chí Minh</option>
                                       <option>Quảng Nam</option>

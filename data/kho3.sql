@@ -1,28 +1,34 @@
   create table nhanvien (
-	  idNV int not null AUTO_INCREMENT,
+	  idNV char(5) not null ,
     tenNV nvarchar(100),
-    sdt char(10),
-	  cmnd char(20),
-    email char(50),
-    diachi nvarchar(100),
+    sdtNV char(10),
+	  cmndNV char(20),
+    emailNV char(50),
+    diachiNV nvarchar(100),
     primary key(idNV)
     );
 
   create table khachhang (
-	  idKH int not null AUTO_INCREMENT,
-    tenKhachHang nvarchar(100),
-    sdt char(10),
-	  cmnd char(20),
-    email char(50),
-    diachi nvarchar(100),
+	  idKH  char(5) not null,
+    tenKH nvarchar(100),
+    sdtKH char(10),
+	  cmndKH char(20),
+    emailKH char(50),
+    diachiKH nvarchar(100),
     primary key(idKH)
  );
 
-  create table loaihanghoa (
-    idLoai int not null AUTO_INCREMENT,
-    tenLoai nvarchar(100),
+   create table loaichua (
+    idLC int not null AUTO_INCREMENT,
+    tenLC nvarchar(100),
     giaThanh decimal,
-    PRIMARY KEY (idLoai)
+    PRIMARY KEY (idLC)
+);
+
+  create table loaihang (
+    idLH char(2),
+    tenLH nvarchar(100),
+    PRIMARY KEY (idLH)
 );
 
   create table trangthai (
@@ -32,15 +38,20 @@
 );
 
  create table hanghoa (
-  idHH int not null AUTO_INCREMENT,
-  idLoai int,
-  tenHang nvarchar(100),
+  idHH char(6) not null,
+  idLC int,
+  idLH char(2),
+  tenHH nvarchar(100),
   cannang int,
   idTT char(2),
   ghichu nvarchar(100),
   PRIMARY KEY (idHH),
-  FOREIGN KEY (idLoai)
-  REFERENCES loaihanghoa(idLoai)
+  FOREIGN KEY (idLC)
+  REFERENCES loaichua(idLC)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  FOREIGN KEY (idLH)
+  REFERENCES loaihang(idLH)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
   FOREIGN KEY (idTT)
@@ -48,11 +59,12 @@
   ON DELETE CASCADE
   ON UPDATE CASCADE
 );
+
  create table chitiet (
-	idCT int not null AUTO_INCREMENT,
-  idHH int not null,
-  idKH int null,
-  idNV int,
+	idCT char(11) not null,
+  idHH char(6) not null,
+  idKH char(5) null,
+  idNV char(5),
   ngaytao datetime,
   PRIMARY KEY (idCT),
   FOREIGN KEY (idHH)
@@ -67,8 +79,7 @@
   REFERENCES nhanvien(idNV)
   ON DELETE CASCADE
   ON UPDATE CASCADE
-
-  );
+);
 
   create table kho (
     idKho int NOT NULL AUTO_INCREMENT,
@@ -87,11 +98,17 @@
   ON DELETE CASCADE
   ON UPDATE CASCADE
 );
-  
+
+   create table hinhthuc(
+    idHT char(2) not null,
+    hinhthuc nvarchar(100),
+    PRIMARY KEY (idHT)
+);
+
   create table phieunhap (
-	  idPN int NOT NULL AUTO_INCREMENT,
+	  idPN char(5) not null ,
    ngaynhap datetime,
-   idNV int,
+   idNV  char(5),
     primary key(idPN),
     FOREIGN KEY (idNV)
   REFERENCES nhanvien(idNV)
@@ -100,10 +117,10 @@
  );
  
  
-create table ctphieunhap (
-  idCTPN int not null AUTO_INCREMENT,
-	idPN int not null,
-   idCT int null,
+  create table ctphieunhap (
+  idCTPN char(17) not null,
+	idPN char(5) not null,
+   idCT char(11)  null UNIQUE,
    ghichu nvarchar(100) null,
    idkhu char(2) null,
     primary key(idCTPN),
@@ -120,10 +137,11 @@ create table ctphieunhap (
   ON DELETE CASCADE
   ON UPDATE CASCADE
  );    
+ 
   create table phieuxuat (
-	idPX int NOT NULL AUTO_INCREMENT,
+	idPX char(5) not null,
    ngayxuat datetime,
-   idNV int NOT NULL,
+   idNV char(5),
     primary key(idPX),
     FOREIGN KEY (idNV)
   REFERENCES nhanvien(idNV)
@@ -132,11 +150,11 @@ create table ctphieunhap (
  );
  
 
-create table ctphieuxuat (
-  idCTPX int not null AUTO_INCREMENT,
-	idPX int not null,
-  idCT int  null,
-  hinhthuc nvarchar(100) null,
+  create table ctphieuxuat (
+  idCTPX char(17) not null,
+	idPX char(5) not null,
+  idCT char(11) null UNIQUE,
+  idHT char(2) null,
     primary key(idCTPX),
     FOREIGN KEY (idPX)
   REFERENCES phieuxuat(idPX)
@@ -145,29 +163,43 @@ create table ctphieuxuat (
      FOREIGN KEY (idCT)
        REFERENCES chitiet(idCT)
   ON DELETE CASCADE
+  ON UPDATE CASCADE,
+       FOREIGN KEY (idHT)
+       REFERENCES hinhthuc(idHT)
+  ON DELETE CASCADE
   ON UPDATE CASCADE
   
  );
  
- insert into nhanvien (tenNV,sdt,cmnd,email,diachi) 
- values ("Nguyễn Hồng Quân", "0369743256","123456789","nh@gmail.com","Đà Nẵng"),
- ("Trương Bảo Phúc", "0369743256","123456789","tp@gmail.com","Đà Nẵng"),
- ("Lê Na", "0369743256","123456789","n@gmail.com","Đà Nẵng"),
- ("Nguyễn Minh Lợi", "0369743256","123456789","nl@gmail.com","Đà Nẵng")
+      insert into nhanvien (idNV,tenNV,sdtNV,cmndNV,emailNV,diachiNV) 
+  values ("NV001","Nguyễn Hồng Quân", "0369743256","123456789","nh@gmail.com","Đà Nẵng"),
+  ("",'Trương Bảo Phúc", "0369743256","123456789","tp@gmail.com","Đà Nẵng"),
+  ("","Lê Na", "0369743256","123456789","n@gmail.com","Đà Nẵng"),
+  ("","Nguyễn Minh Lợi", "0369743256","123456789","nl@gmail.com","Đà Nẵng")
+
+    insert into khachhang (idKH,tenKH,sdtKH,cmndKH,emailKH,diachiKH)
+  values ("KH001","Nguyễn Hồng A", "0369743256","123456789","nhq@gmail.com","Đà Nẵng"),
+  ("","Trương Bảo B", "0369743256","123456789","tbp@gmail.com","Đà Nẵng"),
+  ("","Lê C", "0369743256","123456789","Đà Nẵng","ln@gmail.com"),
+  ("","Nguyễn Minh D", "0369743256","123456789","nml@gmail.com","Đà Nẵng")
  
  
-insert into khachhang (tenKhachHang,sdt,cmnd,email,diachi) 
- values ("Nguyễn Hồng A", "0369743256","123456789","nhq@gmail.com","Đà Nẵng"),
- ("Trương Bảo B", "0369743256","123456789","tbp@gmail.com","Đà Nẵng"),
- ("Lê C", "0369743256","123456789","Đà Nẵng","ln@gmail.com"),
- ("Nguyễn Minh D", "0369743256","123456789","nml@gmail.com","Đà Nẵng")
- 
- 
- insert into loaihanghoa (tenLoai,giaThanh) 
+ insert into loaichua(tenLC,giaThanh) 
  values ("Container", 1000000),
  ("Thùng to", 50000),
  ("Thùng vừa", 25000),
   ("Palet", 200000)
+
+  insert into loaihang(idLH, tenLH) 
+  values ("TP", "Thực phẩm"),
+  ("GD", "Đồ gia dụng"),
+  ("DT", "Đồ điện tử"),
+  ("TT", "Thời trang và phụ kiện"),
+  ("VL", "Vật liệu"),
+  ("CN", "Công nghiệp"),
+  ("NN", "Nông nghiệp"),
+  ("PT", "Phương tiện và phụ tùng"),
+  ("TD", "Hàng tiêu dùng")
 
 insert into trangthai (idTT,trangthai)
   values ("CD","Chưa duyệt"),
@@ -175,19 +207,16 @@ insert into trangthai (idTT,trangthai)
   ("NK","Nhập kho"),
     ("XK","Xuất kho")
     
-insert into hanghoa (idLoai,tenHang,cannang,idTT,ghichu)
-values (1,"Máy tính",1000,"CD",""),
-(2,"Đồ dùng",100,"CD",""),
-(3,"Thực phẩm",50,"DD",""),
-(4,"Độc dược",100,"DD",""),
-(1,"Dược phẩm",1000,"DD",""),
-(2,"Súng",100,"DD",""),
-(3,"Hoa",50,"DD",""),
-(4,"Xe",100,"DD",""),
-(1,"Hàng hóa",1000,"NK",""),
-(2,"Sách",100,"NK",""),
-(3,"Bàn",50,"NK",""),
-(4,"Ghế",100,"NK","")
+    insert into hanghoa (idHH,idLH,idLC,tenHH,cannang,idTT,ghichu)
+values ("","DT","2","Máy tính",1000,"CD",""),
+("","DT","1","Máy tính",1000,"CD",""),
+("","VL","2","Xi măng",1000,"CD",""),
+("","TP","2","Gạo",1000,"CD",""),
+("","CN","3","Máy may",1000,"CD",""),
+("","GD","3","Bàn",1000,"CD",""),
+("","GD","2","Ghế",1000,"CD",""),
+("","PT","1","Ô tô",1000,"CD",""),
+("","NN","4","Phân bón",1000,"CD","")
 
 insert into chitiet (idHH,idKH,idNV,ngaytao)
 values (1,1,1,"2021-05-01 00:00:00"),
@@ -209,82 +238,19 @@ values ("Ngoài trời A"),
 
 
 insert into khu (idkhu,tenkhu,idkho)
-values ("AA,Khu AA",1),
-("AB,Khu AB",1),
-("AC,Khu AC",1),
-("BA,Khu BA",2),
-("BB,Khu BB",2),
-("BC,Khu BC",2),
-("CA,Khu CA",3),
-("CB,Khu CB",3),
-("CC,Khu CC",3),
+values ("AA","Khu AA",1),
+("AB","Khu AB",1),
+("AC","Khu AC",1),
+("BA","Khu BA",2),
+("BB","Khu BB",2),
+("BC","Khu BC",2),
+("CA","Khu CA",3),
+("CB","Khu CB",3),
+("CC","Khu CC",3)
+
+insert into hinhthuc (idHT,hinhthuc)
+values ("VC","Vận chuyển bộ"),
+("NN","Nhận ngay")
 
 
---thêm vào chi tiết sau khi thêm hàng hóa
-DELIMITER //
-CREATE TRIGGER insert_chitiet 
-AFTER INSERT ON hanghoa
-FOR EACH ROW
-BEGIN
-  INSERT INTO chitiet (idHH, idKH, idNV, ngaytao)
-  VALUES (NEW.idHH, NULL, 1, NOW());
-END//
-DELIMITER ;
 
---update chi tiết sau khi thêm khách hàng
-DELIMITER //
-
-CREATE TRIGGER insert_chitiet_KH 
-AFTER INSERT ON khachhang
-FOR EACH ROW
-BEGIN
- update chitiet set idKH=NEW.idKH where idKH is NULL;
-END//
-DELIMITER ;
-
-
-DELIMITER //
---thêm vào ct phiếu nhập sau khi thêm phiếu nhập
-create TRIGGER insert_ctphieunhap
-AFTER INSERT ON phieunhap
-FOR EACH ROW
-BEGIN
-  INSERT INTO ctphieunhap (idPN, idCT, ghichu, idkhu) VALUES (NEW.idPN, NULL, "", NULL);
-END;
-//
-DELIMITER ;
-
---update trạng thái hàng hóa sau khi update ct phiếu nhập
-DELIMITER //
-
-CREATE TRIGGER update_idTT
-AFTER UPDATE ON ctphieunhap
-FOR EACH ROW
-BEGIN
-  UPDATE hanghoa SET idTT = "NK" WHERE idHH = (SELECT idHH FROM chitiet WHERE idCT = NEW.idCT);
-END;
-//           
-
-DELIMITER ;
---thêm vào ct phiếu xuất sau khi thêm phiếu xuất
-DELIMITER //
-create TRIGGER insert_ctphieuxuat
-AFTER INSERT ON phieuxuat
-FOR EACH ROW
-BEGIN
-  INSERT INTO ctphieuxuat (idPX, idCT, hinhthuc) VALUES (NEW.idPX, NULL, "");
-END;
-//
-DELIMITER ;
---update trạng thái hàng hóa sau khi update ct phiếu xuất
-DELIMITER //
-
-CREATE TRIGGER update_idTT_XK
-AFTER UPDATE ON ctphieuxuat
-FOR EACH ROW
-BEGIN
-  UPDATE hanghoa SET idTT = "XK" WHERE idHH = (SELECT idHH FROM chitiet WHERE idCT = NEW.idCT);
-END;
-//           
-
-DELIMITER ;
