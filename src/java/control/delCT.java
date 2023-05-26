@@ -5,9 +5,6 @@
 package control;
 
 import dao.DAO;
-import entity.DHNK;
-import entity.Donhang;
-import entity.Nguoi;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,13 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+
 /**
  *
  * @author ng782
  */
-@WebServlet(name = "loadNK", urlPatterns = {"/loadNK"})
-public class loadNK extends HttpServlet {
+@WebServlet(name = "delCT", urlPatterns = {"/delCT"})
+public class delCT extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,15 +33,9 @@ public class loadNK extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
         DAO dao = new DAO();
-        Nguoi n = dao.getKHByID(id);
-        Donhang h =dao.getHHByID(id);
-        
-        request.setAttribute("kh", n);
-         request.setAttribute("id", id);
-         request.setAttribute("hh", h);
-
-        }
-
+        dao.deleteCT(id);
+        request.getRequestDispatcher("main.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

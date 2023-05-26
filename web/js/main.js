@@ -79,12 +79,8 @@ function toggleElementVisibility(elementSelector) {
     function navigateToLink(url) {
       window.location.href = url;
     }
- function generatePDF(){
-     const element = document.getElementById("form");
-     html2pdf().form(element).save();
- }
 
-
+// xuất file 
 function exportToPDF() {
   var name = document.getElementById('name');
 var textContent = name.textContent;
@@ -102,4 +98,14 @@ var textContent = name.textContent;
   html2pdf().from(element).set(opt).save();
 }
 
+// nút 
+function toggleButton(IDbt) {
+  var button = document.getElementById(IDbt);
+  var value = document.getElementById('ttdh').textContent;
+  if (value === "Đã duyệt") {
+    button.style.display = "block"; // Hiển thị nút
+  } else {
+    button.style.display = "none"; // Ẩn nút
+  }
+}
 

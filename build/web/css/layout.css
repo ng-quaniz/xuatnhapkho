@@ -458,6 +458,18 @@
     padding:10px;
     margin: 5px;
 }
+.button3{
+    color: #ffffff;
+    background-color: #069A19;
+    padding:10px;
+    margin: 5px;
+}
+.button4{
+    color: #ffffff;
+    background-color: #9DB2BF;
+    padding:10px;
+    margin: 5px;
+}
 /* reponsive */
 /* .column {
     width: 100%;

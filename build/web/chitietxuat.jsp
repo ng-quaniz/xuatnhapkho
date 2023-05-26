@@ -15,9 +15,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/default.css">
   <link rel="stylesheet" href="css/layout.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 
@@ -131,8 +128,8 @@
                 </div>
               </div>
                                           <div class="btn_AddOrder">
-                                    <div onclick="(navigateToLink('loadCT?id=${id}'))" class="btn btn-dark button1" >Quay lại</div>
-                                    <div class="btn btn-primary button2" onclick="exportToPDF()">Xuất</div>
+                                    <div onclick="(navigateToLink('loadCT?id=${id}'))" class="btn btn-dark button4" >Quay lại</div>
+                                    <div class="btn btn-primary button3" onclick="exportToPDF()">Xuất</div>
                                   </div>
             </div>
           </div>

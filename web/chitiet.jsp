@@ -15,10 +15,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/default.css">
   <link rel="stylesheet" href="css/layout.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
-
+  <script src="https://kit.fontawesome.com/3568139a07.js" crossorigin="anonymous"></script>
+  
      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
@@ -39,7 +37,7 @@
                 <div class="accordion-body">
                 <div class="readMoreForm">
                   <form  class="row g-6" id="myForm">
-                      <div class="c"> <p class="title_formAccor">MĐH: <span class="d" id="name">${id}</span></p><p class="title_formAccor">Trạng thái: <span class="d">${hh.trangthai}</span></p></div>
+                      <div class="c"> <p class="title_formAccor">MĐH: <span class="d" id="name">${id}</span></p><p class="title_formAccor">Trạng thái: <span id="ttdh" class="d">${hh.trangthai}</span></p></div>
                     <p class="title_formAccor">Thông tin khách hàng</p>
                     <div class="col-md-3">
                       <label for="validationSenderName" class="form-label">Tên khách hàng:</label>
@@ -176,8 +174,10 @@
                 </div>
               </div>
                                           <div class="btn_AddOrder">
-                                    <div onclick="(navigateToLink('main.jsp'))" class="btn btn-dark button1" >Quay lại</div>
-                                    <div class="btn btn-primary button2" onclick="exportToPDF()">Xuất</div>
+                                    <button class="btn btn-dark button2" id="edit" onclick="(navigateToLink('loadEdit?id=${id}'))" ><i class="fa-solid fa-file-pen"></i></button>
+                                    <button class="btn btn-primary button1" id="delete" onclick="(navigateToLink('delCT?id=${id}'))"><i class="fa-sharp fa-solid fa-trash"></i></button>
+                                    <div onclick="(navigateToLink('main.jsp'))" class="btn btn-dark button4" >Quay lại</div>
+                                    <div class="btn btn-primary button3" onclick="exportToPDF()">Xuất</div>
                                   </div>
             </div>
           </div>
@@ -186,6 +186,7 @@
                                      
       </div>
                                           
-    
+        <script>toggleButton('delete');
+            toggleButton('edit');</script>
 </body>
 </html>

@@ -15,14 +15,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
  * @author ng782
  */
-@WebServlet(name = "loadCT", urlPatterns = {"/loadCT"})
-public class loadCT extends HttpServlet {
+@WebServlet(name = "edit", urlPatterns = {"/edit"})
+public class edit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,20 +34,21 @@ public class loadCT extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
+        String hname = request.getParameter("edit_tenh");
+        String hcan = request.getParameter("edit_cannang");
+
+        String kname = request.getParameter("edit_tenk");
+        String ksdt = request.getParameter("edit_sdtk");
+        String kcmnd = request.getParameter("edit_cmndk");
+        String kemail = request.getParameter("edit_emailk");
+        String kdiachi = request.getParameter("edit_dchik");
         DAO dao = new DAO();
-        Nguoi n = dao.getKHByID(id);
-        Donhang h =dao.getHHByID(id);
-        DHNK pn = dao.getPNByID(id);
-        Donhang px = dao.getPXByID(id);
-        request.setAttribute("kh", n);
-         request.setAttribute("id", id);
-         request.setAttribute("hh", h);
-         request.setAttribute("pn", pn);
-         request.setAttribute("px", px);
-        request.getRequestDispatcher("chitiet.jsp").forward(request, response);
-        
+        dao.editKH(id, kname, kcmnd, ksdt,kemail, kdiachi);
+        dao.editHH(id,hname, hcan  );
+        response.sendRedirect("loadCT?id=" + id);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -15,14 +15,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+
 
 /**
  *
  * @author ng782
  */
-@WebServlet(name = "loadCT", urlPatterns = {"/loadCT"})
-public class loadCT extends HttpServlet {
+@WebServlet(name = "loadEdit", urlPatterns = {"/loadEdit"})
+public class loadEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,19 +35,15 @@ public class loadCT extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("id");
         DAO dao = new DAO();
         Nguoi n = dao.getKHByID(id);
         Donhang h =dao.getHHByID(id);
-        DHNK pn = dao.getPNByID(id);
-        Donhang px = dao.getPXByID(id);
         request.setAttribute("kh", n);
-         request.setAttribute("id", id);
-         request.setAttribute("hh", h);
-         request.setAttribute("pn", pn);
-         request.setAttribute("px", px);
-        request.getRequestDispatcher("chitiet.jsp").forward(request, response);
+        request.setAttribute("id", id);
+        request.setAttribute("hh", h);
+        request.getRequestDispatcher("edit.jsp").forward(request, response);
         
     }
 

@@ -348,4 +348,43 @@ public class DAO {
         }
         return null;
             }
+    
+    public void deleteCT(String id) {
+        String query = "delete from chitiet where idCT = ?";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+  public void editKH(String id, String tenKH, String cmnd, String sdt,
+            String email, String diachi) {
+        String query = "update khachhang set tenkh = ?, cmndkh = ? ,  sdtkh = ? , emailkh = ? , diachikh = ?  where idKH = (select idKH from chitiet where idCT = ? )";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            ps.setString(1, tenKH);
+            ps.setString(2, cmnd);
+            ps.setString(3, sdt);
+            ps.setString(4, email);
+            ps.setString(5, diachi);
+            ps.setString(6, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    public void editHH(String id, String tenHH, String cannang) {
+        String query ="update hanghoa set tenhh = ? , cannang = ? where idHH = (select idHH from chitiet where idCT = ? );";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            ps.setString(1, tenHH);
+            ps.setString(2, cannang);
+            ps.setString(3, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 }
