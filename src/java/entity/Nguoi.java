@@ -9,7 +9,7 @@ package entity;
  * @author ng782
  */
 public class Nguoi {
-    private int id;
+    private String id;
     private String ten;
     private int sdt;
     private int cmnd;
@@ -19,7 +19,7 @@ public class Nguoi {
     public Nguoi(){
     }
 
-    public Nguoi(int id, String ten, int sdt, int cmnd, String email, String diachi) {
+    public Nguoi(String id, String ten, int sdt, int cmnd, String email, String diachi) {
         this.id = id;
         this.ten = ten;
         this.sdt = sdt;
@@ -28,11 +28,11 @@ public class Nguoi {
         this.diachi = diachi;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

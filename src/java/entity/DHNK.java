@@ -9,7 +9,7 @@ package entity;
  * @author ng782
  */
 public class DHNK {
-    private int id;
+    private String id;
     private String ten;
     private String loai;
     private String ngaytao;
@@ -18,7 +18,7 @@ public class DHNK {
     
     public DHNK(){}
 
-    public DHNK(int id, String ten, String loai, String ngaytao, String kho, String khu) {
+    public DHNK(String id, String ten, String loai, String ngaytao, String kho, String khu) {
         this.id = id;
         this.ten = ten;
         this.loai = loai;
@@ -27,11 +27,11 @@ public class DHNK {
         this.khu = khu;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

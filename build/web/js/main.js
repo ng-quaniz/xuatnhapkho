@@ -66,11 +66,12 @@ function toggleElementVisibility(elementSelector) {
       document.getElementById('data2Input').textContent = selectedData.data2;
       document.getElementById('data3Input').textContent = selectedData.data3;
       document.getElementById('data5Input').textContent = selectedData.data4;
+      document.getElementById('data10Input').textContent = selectedData.data5;
       document.getElementById('data4Input').value = selectedData.data1;
       document.getElementById('data6Input').textContent = selectedData.data2;
       document.getElementById('data7Input').textContent = selectedData.data3;
       document.getElementById('data8Input').textContent = selectedData.data4;
-       document.getElementById('data9Input').textContent = selectedData.data5;
+      document.getElementById('data9Input').textContent = selectedData.data5;
 
     }
     
@@ -78,5 +79,27 @@ function toggleElementVisibility(elementSelector) {
     function navigateToLink(url) {
       window.location.href = url;
     }
+ function generatePDF(){
+     const element = document.getElementById("form");
+     html2pdf().form(element).save();
+ }
+
+
+function exportToPDF() {
+  var name = document.getElementById('name');
+var textContent = name.textContent;
+
+
+  var element = document.getElementById('myForm');
+  var opt = {
+    margin: [1, 1, 0, 1],
+    filename: textContent+'.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 1.5 },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  html2pdf().from(element).set(opt).save();
+}
 
 

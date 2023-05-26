@@ -32,14 +32,15 @@
     <div id="listOrderXNK"> 
         <div class="container e">
           <div class="formAddOrder">
-            <h2 class="tiltle_order b" >CHI TIẾT ĐƠN HÀNG</h2>
+            <h2 class="tiltle_order b" >Đơn Nhập Kho</h2>
             <div class="accordion" id="accordionPanelsStayOpenExample">
               <div class="accordion-item" >
 
                 <div class="accordion-body">
                 <div class="readMoreForm">
                   <form  class="row g-6" id="myForm">
-                      <div class="c"> <p class="title_formAccor">MĐH: <span class="d" id="name">${id}</span></p><p class="title_formAccor">Trạng thái: <span class="d">${hh.trangthai}</span></p></div>
+                      <div class="c"> <p class="title_formAccor">Mã: <span class="d" id="name">${pn.id}-${id}</span></p><p class="title_formAccor">Ngày nhập: <span class="d">${pn.ngaytao}</span></p></div>
+                        <div class="c"> <p class="title_formAccor">Kho: <span class="d" id="name">${pn.kho}</span>  Khu: <span class="d" id="name">${pn.khu}</span> </p></div>
                     <p class="title_formAccor">Thông tin khách hàng</p>
                     <div class="col-md-3">
                       <label for="validationSenderName" class="form-label">Tên khách hàng:</label>
@@ -123,52 +124,6 @@
                                 </tbody>
                               </table>
                             </div>
-                            <p class="title_formAccor">Nhập kho</p>
-                                  <div class="accordion-body">
-                                    <div class="inf-GoodsTable">
-                                      <table class="table" id="table_ImportGood">
-                                        <thead>
-                                          <tr >
-                                            <th scope="col">Mã phiếu nhập</th>
-                                            <th scope="col">Kho</th>
-                                            <th scope="col">Ngày nhập</th>
-                                            <th scope="col">Nhân viên</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr onclick="(navigateToLink('loadCTNK?id=${id}'))">
-                                            <td>${pn.id}</td>
-                                            <td>${pn.kho}/${pn.khu}</td>
-                                            <td>${pn.ngaytao}</td>
-                                            <td>${pn.ten}</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                  </div>
-                                  <p class="title_formAccor">Xuất kho</p>
-                                  <div class="accordion-body">
-                                    <div class="inf-GoodsTable">
-                                      <table class="table" id="table_ImportGood">
-                                        <thead>
-                                          <tr >
-                                            <th scope="col">Mã phiếu xuất</th>
-                                            <th scope="col">Hình thức</th>
-                                            <th scope="col">Ngày xuất</th>
-                                            <th scope="col">Nhân viên</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr onclick="(navigateToLink('loadCTXK?id=${id}'))">
-                                            <td>${px.id}</td>
-                                            <td>${px.loai}</td>
-                                            <td>${px.ngaytao}</td>
-                                            <td>${px.ten}</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                  </div>
                   </form>
                                                                                        
                                     
@@ -176,7 +131,7 @@
                 </div>
               </div>
                                           <div class="btn_AddOrder">
-                                    <div onclick="(navigateToLink('main.jsp'))" class="btn btn-dark button1" >Quay lại</div>
+                                    <div onclick="(navigateToLink('loadCT?id=${id}'))" class="btn btn-dark button1" >Quay lại</div>
                                     <div class="btn btn-primary button2" onclick="exportToPDF()">Xuất</div>
                                   </div>
             </div>

@@ -9,7 +9,7 @@ package entity;
  * @author ng782
  */
 public class Donhang {
-    private int id;
+    private String id;
     private String ten;
     private String loai;
     private String trangthai;
@@ -20,7 +20,7 @@ public class Donhang {
     
    public Donhang(){}
 
-    public Donhang(int id, String ten, String loai, String trangthai, String ngaytao) {
+    public Donhang(String id, String ten, String loai, String trangthai, String ngaytao) {
         this.id = id;
         this.ten = ten;
         this.loai = loai;
@@ -28,11 +28,11 @@ public class Donhang {
         this.ngaytao = ngaytao;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

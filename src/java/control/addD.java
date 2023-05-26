@@ -31,19 +31,18 @@ public class addD extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String hloai = request.getParameter("add_loaih");
+        String hloaih = request.getParameter("add_loaih");
         String hname = request.getParameter("add_tenh");
         String hcan = request.getParameter("add_cannang");
         String htt = "DD";
-        String hgch = "";
+        String hloaic = request.getParameter("add_loaic");
         String kname = request.getParameter("add_tenk");
         String ksdt = request.getParameter("add_sdtk");
         String kcmnd = request.getParameter("add_cmndk");
         String kemail = request.getParameter("add_emailk");
         String kdiachi = request.getParameter("add_dchik");
-        int idloai = Integer.parseInt(hloai);
         DAO dao = new DAO();
-        dao.insertHang(idloai, hname, hcan, htt, hgch);
+        dao.insertHang(hloaih,hloaic, hname, hcan, htt);
         dao.insertKH(kname, ksdt, kcmnd, kemail, kdiachi);
         response.sendRedirect("main.jsp");
         }

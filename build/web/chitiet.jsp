@@ -15,6 +15,16 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/default.css">
   <link rel="stylesheet" href="css/layout.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
   <title>Express_DN</title>
 </head>
 <body>
@@ -24,12 +34,12 @@
           <div class="formAddOrder">
             <h2 class="tiltle_order b" >CHI TIẾT ĐƠN HÀNG</h2>
             <div class="accordion" id="accordionPanelsStayOpenExample">
-              <div class="accordion-item">
+              <div class="accordion-item" >
 
                 <div class="accordion-body">
                 <div class="readMoreForm">
-                  <form action="" class="row g-6">
-                    <div class="c"> <p class="title_formAccor">MĐH: <span class="d">${id}</span></p><p class="title_formAccor">Trạng thái: <span class="d">${hh.trangthai}</span></p></div>
+                  <form  class="row g-6" id="myForm">
+                      <div class="c"> <p class="title_formAccor">MĐH: <span class="d" id="name">${id}</span></p><p class="title_formAccor">Trạng thái: <span class="d">${hh.trangthai}</span></p></div>
                     <p class="title_formAccor">Thông tin khách hàng</p>
                     <div class="col-md-3">
                       <label for="validationSenderName" class="form-label">Tên khách hàng:</label>
@@ -97,18 +107,18 @@
                               <table class="table" id="table_ImportGood">
                                 <thead>
                                   <tr>
+                                    <th scope="col">Mã hàng hóa </th>
                                     <th scope="col">Tên hàng hoá</th>
-                                    <th scope="col">Loại Hàng</th>
+                                    <th scope="col">Loại Hàng - loại chứa</th>
                                     <th scope="col">Cân nặng</th>
-                                    <th scope="col">Ghi chú</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr>
+                                    <td>${hh.id}</td>
                                     <td>${hh.ten}</td>
                                     <td>${hh.loai}</td>
                                     <td>${hh.ngaytao}</td>
-                                    <td>...</td>
                                   </tr>
                                 </tbody>
                               </table>
@@ -118,7 +128,7 @@
                                     <div class="inf-GoodsTable">
                                       <table class="table" id="table_ImportGood">
                                         <thead>
-                                          <tr>
+                                          <tr >
                                             <th scope="col">Mã phiếu nhập</th>
                                             <th scope="col">Kho</th>
                                             <th scope="col">Ngày nhập</th>
@@ -126,7 +136,7 @@
                                           </tr>
                                         </thead>
                                         <tbody>
-                                          <tr>
+                                          <tr onclick="(navigateToLink('loadCTNK?id=${id}'))">
                                             <td>${pn.id}</td>
                                             <td>${pn.kho}/${pn.khu}</td>
                                             <td>${pn.ngaytao}</td>
@@ -141,7 +151,7 @@
                                     <div class="inf-GoodsTable">
                                       <table class="table" id="table_ImportGood">
                                         <thead>
-                                          <tr>
+                                          <tr >
                                             <th scope="col">Mã phiếu xuất</th>
                                             <th scope="col">Hình thức</th>
                                             <th scope="col">Ngày xuất</th>
@@ -149,7 +159,7 @@
                                           </tr>
                                         </thead>
                                         <tbody>
-                                          <tr>
+                                          <tr onclick="(navigateToLink('loadCTXK?id=${id}'))">
                                             <td>${px.id}</td>
                                             <td>${px.loai}</td>
                                             <td>${px.ngaytao}</td>
@@ -159,21 +169,23 @@
                                       </table>
                                     </div>
                                   </div>
-                                  <div class="btn_AddOrder">
-                                    <div onclick="(navigateToLink('main.jsp'))" class="btn btn-dark button1" >Quay lại</div>
-                                    <div class="btn btn-primary button2">In</div>
-                                  </div>
                   </form>
+                                                                                       
+                                    
                 </div>
                 </div>
               </div>
+                                          <div class="btn_AddOrder">
+                                    <div onclick="(navigateToLink('main.jsp'))" class="btn btn-dark button1" >Quay lại</div>
+                                    <div class="btn btn-primary button2" onclick="exportToPDF()">Xuất</div>
+                                  </div>
             </div>
           </div>
+                                          
         </div>
+                                     
       </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-      crossorigin="anonymous"></script>
-    <script src="js/main.js"></script>
+                                          
+    
 </body>
 </html>

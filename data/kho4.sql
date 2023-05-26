@@ -95,8 +95,8 @@ CREATE TRIGGER insert_chitiet
 AFTER INSERT ON hanghoa
 FOR EACH ROW
 BEGIN
-    INSERT INTO chitiet (idHH, idKH, idNV, ngaytao)
-    VALUES (NEW.idHH, NULL, 'NV001', NOW());
+    INSERT INTO chitiet (idCT, idHH, idKH, idNV, ngaytao)
+    VALUES ("",NEW.idHH, NULL, 'NV001', NOW());
 END//
 DELIMITER ;
 
@@ -255,9 +255,7 @@ BEGIN
   UPDATE hanghoa SET idTT = "XK" WHERE idHH = (SELECT idHH FROM chitiet WHERE idCT = NEW.idCT);
 END;
 //      
-
-
-
+DELIMITER ;
 
 
 

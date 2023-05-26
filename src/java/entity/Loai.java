@@ -9,21 +9,21 @@ package entity;
  * @author ng782
  */
 public class Loai {
-       private int idl;
+       private String idl;
        private String loai;
        
        Loai(){}
 
-    public Loai(int idl, String loai) {
+    public Loai(String idl, String loai) {
         this.idl = idl;
         this.loai = loai;
     }
 
-    public int getIdl() {
+    public String getIdl() {
         return idl;
     }
 
-    public void setIdl(int idl) {
+    public void setIdl(String idl) {
         this.idl = idl;
     }
 

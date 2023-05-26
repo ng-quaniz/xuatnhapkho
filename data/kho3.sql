@@ -253,4 +253,6 @@ values ("VC","Vận chuyển bộ"),
 ("NN","Nhận ngay")
 
 
-
+select idCT, tenHH, tenLH, tenLC, cân nặng
+from chitiet, hanghoa, loaihang, loaichua
+where chitiet.idHH = hanghoa.idHH and hanghoa.idLH = loaihang.idLH and hanghoa.idLC = loaichua.idLC

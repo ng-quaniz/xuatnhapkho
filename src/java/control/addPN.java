@@ -36,10 +36,8 @@ public class addPN extends HttpServlet {
         DAO dao = new DAO();
         dao.insertPN();
         String idCT = request.getParameter("id_ct");
-        int idCTInt = Integer.parseInt(idCT);
-        String idkhu = request.getParameter("idkhu");
-        String ghichu = "";
-        dao.insertCTPN(idCTInt,ghichu,idkhu);
+        String idkhu = request.getParameter("idkhu");  
+        dao.insertCTPN(idCT,idkhu);
         response.sendRedirect("main.jsp");
 
     }

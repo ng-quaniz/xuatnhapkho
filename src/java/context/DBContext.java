@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class DBContext {
     private Connection connection;
-    private String url = "jdbc:mysql://localhost:3306/kho";
+    private String url = "jdbc:mysql://localhost:3306/kho2";
     private String user = "root";
     private String password = "abc123";
 

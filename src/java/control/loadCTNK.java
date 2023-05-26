@@ -5,6 +5,9 @@
 package control;
 
 import dao.DAO;
+import entity.DHNK;
+import entity.Donhang;
+import entity.Nguoi;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,14 +15,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import java.util.List;
 
 /**
  *
  * @author ng782
  */
-@WebServlet(name = "addXK", urlPatterns = {"/addXK"})
-public class addXK extends HttpServlet {
+@WebServlet(name = "loadCTNK", urlPatterns = {"/loadCTNK"})
+public class loadCTNK extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,16 +35,19 @@ public class addXK extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        String id = request.getParameter("id");
         DAO dao = new DAO();
-        dao.insertPX();
-        String idCT = request.getParameter("id_ctpx");
-        String ht = request.getParameter("HT");
-        dao.insertCTPX(idCT,ht);
-        response.sendRedirect("main.jsp");
-        }
-    
+        Nguoi n = dao.getKHByID(id);
+        Donhang h =dao.getHHByID(id);
+        DHNK pn = dao.getPNByID(id);
+        request.setAttribute("kh", n);
+         request.setAttribute("id", id);
+         request.setAttribute("hh", h);
+         request.setAttribute("pn", pn);
+         
+        request.getRequestDispatcher("chitietnhap.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

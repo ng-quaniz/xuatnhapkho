@@ -61,7 +61,7 @@
                         <%  DAO dao = new DAO(); 
                             List<Donhang> listD = dao.getAllDonhang();
                             for(Donhang d : listD) {%>
-                            <tr onclick="(navigateToLink('loadCT?id=<%=d.getId()%>'))"">
+                            <tr onclick="(navigateToLink('loadCT?id=<%=d.getId()%>'))">
                         <th scope="row"><%=d.getId()%></th>
                         <td><%=d.getTen()%></td>
                         <td><%=d.getLoai()%></td>
@@ -114,10 +114,10 @@
                       <thead>
                         <tr>
                           <th scope="col">Mã đơn hàng</th>
-                          <th scope="col">Tên Đơn hàng</th>
+                          <th scope="col">Tên hàng</th>
                           <th scope="col">Loại hàng hoá</th>
-                          <th scope="col">Cân nặng</th>
-                          <th scope="col">Ngày</th>
+                          <th scope="col">Loại chứa</th>
+                          <th scope="col">Cân Nặng</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -289,9 +289,9 @@
                                         <thead>
                                           <tr>
                                             <th scope="col">Tên hàng hoá</th>
-                                            <th scope="col">Loại Hàng</th>
+                                            <th scope="col">Loại hàng</th>
+                                            <th scope="col">Loại chứa</th>
                                             <th scope="col">Cân nặng</th>
-                                            <th scope="col">Ghi chú</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -299,7 +299,7 @@
                                             <td id="data2Input"></td>
                                             <td id="data3Input"></td>
                                             <td id="data5Input"></td>
-                                            <td>...</td>
+                                            <td id="data10Input"></td>
                                           </tr>
                                         </tbody>
                                       </table>
@@ -389,8 +389,8 @@
                                           <label for="validationReceiverName" class="form-label">Hình thức</label>
                                           <div class="input-group " required>
                                               <select name="HT" class="form-select">
-                                                  <option selected value="Vận chuyển">Vận chuyển</option>
-                                                  <option value="Nhận ngay">Nhận ngay</option>
+                                                  <option selected value="VC">VC: Vận chuyển</option>
+                                                  <option value="NN">NN: Nhận ngay</option>
                                               </select>
                                           </div>
                                         </div>
@@ -591,16 +591,6 @@
                                   </div>
 
                                   <p class="title_formAccor">Thông Tin Hàng Hoá :</p>
-                                  <div class="col-md-12">
-                                    <p class="form-label">Loại Hàng hoá:</p>
-                                    <select name="add_loaih" class="form-select" id="selectCity" required>
-                                       <%   
-                                    List<Loai> listL = dao.getLoai();
-                                    for (Loai l : listL) {%>
-                                        <option value="<%=l.getIdl()%>"><%=l.getLoai()%></option>
-                                    <%};%>
-                                    </select>
-                                  </div>
                                   <div class="col-md-6">
                                     <label for="validationGoodsName" class="title_address">Tên hàng hoá:</label>
                                     <div class="input-group has-validation">
@@ -612,6 +602,27 @@
                                     <div class="input-group has-validation">
                                       <input name="add_cannang" type="text" class="form-control "placeholder="" id="input_gmailReceiver" required>
                                     </div>
+                                  </div>
+                                                                    <div class="col-md-6">
+                                    <p class="form-label">Loại Hàng hoá:</p>
+                                    <select name="add_loaih" class="form-select" id="selectCity" required>
+                                        <option selected disabled>Chọn loại hàng</option>
+                                       <%   
+                                    List<Loai> listLH = dao.getLoaiH();
+                                    for (Loai lh : listLH) {%>
+                                        <option value="<%=lh.getIdl()%>"><%=lh.getIdl()%>: <%=lh.getLoai()%></option>
+                                    <%};%>
+                                    </select>
+                                  </div>
+                                    <div class="col-md-6">
+                                    <p class="form-label">Loại Chứa:</p>
+                                    <select name="add_loaic" class="form-select" id="selectCity" required>
+                                       <%
+                                    List<Loai> listLC = dao.getLoaiC();
+                                    for (Loai lc : listLC) {%>
+                                        <option value="<%=lc.getIdl()%>"><%=lc.getIdl()%>: <%=lc.getLoai()%></option>
+                                    <%};%>
+                                    </select>
                                   </div>
                                     <div class="btn_AddOrder">
                                         <input type="submit" class="btn btn-primary"  value="Tạo Đơn">
