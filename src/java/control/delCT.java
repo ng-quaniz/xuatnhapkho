@@ -34,7 +34,7 @@ public class delCT extends HttpServlet {
         String id = request.getParameter("id");
         DAO dao = new DAO();
         dao.deleteCT(id);
-        request.getRequestDispatcher("main.jsp").forward(request, response);
+        request.getRequestDispatcher("main.jsp?search_input=").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

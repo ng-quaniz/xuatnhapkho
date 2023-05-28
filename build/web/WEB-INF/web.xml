@@ -5,8 +5,13 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
             https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd">    
     <display-name>My Web Application</display-name>
+    
+  
 
     <welcome-file-list>
         <welcome-file>homepage.html</welcome-file>
     </welcome-file-list>
+    
+
+    
 </web-app>

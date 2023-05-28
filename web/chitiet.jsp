@@ -176,7 +176,7 @@
                                           <div class="btn_AddOrder">
                                     <button class="btn btn-dark button2" id="edit" onclick="(navigateToLink('loadEdit?id=${id}'))" ><i class="fa-solid fa-file-pen"></i></button>
                                     <button class="btn btn-primary button1" id="delete" onclick="(navigateToLink('delCT?id=${id}'))"><i class="fa-sharp fa-solid fa-trash"></i></button>
-                                    <div onclick="(navigateToLink('main.jsp'))" class="btn btn-dark button4" >Quay lại</div>
+                                    <div onclick="(navigateToLink('main.jsp?search_input='))" class="btn btn-dark button4" >Quay lại</div>
                                     <div class="btn btn-primary button3" onclick="exportToPDF()">Xuất</div>
                                   </div>
             </div>

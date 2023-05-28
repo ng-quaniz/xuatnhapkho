@@ -39,7 +39,7 @@ public class addXK extends HttpServlet {
         String idCT = request.getParameter("id_ctpx");
         String ht = request.getParameter("HT");
         dao.insertCTPX(idCT,ht);
-        response.sendRedirect("main.jsp");
+        response.sendRedirect("main.jsp?search_input=");
         }
     
 

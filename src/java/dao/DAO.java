@@ -47,12 +47,40 @@ public class DAO {
 
 }
       
+            public List<Donhang> getDonhang(String sa) {
+        List<Donhang> list = new ArrayList<>();
+        String query = "SELECT ct.idCT, hh.tenHH, kh.tenKH, tt.trangthai, ct.ngaytao\n" +
+"FROM chitiet AS ct\n" +
+"JOIN hanghoa AS hh ON ct.idHH = hh.idHH\n" +
+"JOIN khachhang AS kh ON ct.idKH = kh.idKH\n" +
+"JOIN trangthai AS tt ON hh.idTT = tt.idTT\n" +
+"where idCT like concat(\"%\",?,\"%\")\n" +
+"ORDER BY ct.ngaytao DESC;";
+        try {
+            conn = new DBContext().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+             ps.setString(1, sa);
+            rs = ps.executeQuery();
+           
+            while (rs.next()) {
+                list.add(new Donhang (rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5)));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+
+}
+      
       
        public List<Donhang> getAllDonhangDD() {
         List<Donhang> list = new ArrayList<>();
         String query = "select idCT, tenHH, tenLH, tenLC, cannang\n" +
 "from chitiet, hanghoa, loaihang, loaichua\n" +
-"where chitiet.idHH = hanghoa.idHH and hanghoa.idLH = loaihang.idLH and hanghoa.idLC = loaichua.idLC and hanghoa.idTT = \"DD\"";
+"where chitiet.idHH = hanghoa.idHH and hanghoa.idLH = loaihang.idLH and hanghoa.idLC = loaichua.idLC and hanghoa.idTT = \"DD\" ORDER BY ngaytao DESC;";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
@@ -81,7 +109,7 @@ public class DAO {
 "INNER JOIN khu k ON ctpn.idkhu = k.idkhu\n" +
 "INNER JOIN kho kh ON k.idkho = kh.idkho\n" +
 "WHERE idTT = \"NK\"\n" +
-"ORDER BY ct.idCT ASC;";
+"ORDER BY ngayNhap DESC;";
         try {
             conn = new DBContext().getConnection();//mo ket noi voi sql
             ps = conn.prepareStatement(query);

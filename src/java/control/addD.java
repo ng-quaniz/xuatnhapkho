@@ -44,7 +44,7 @@ public class addD extends HttpServlet {
         DAO dao = new DAO();
         dao.insertHang(hloaih,hloaic, hname, hcan, htt);
         dao.insertKH(kname, ksdt, kcmnd, kemail, kdiachi);
-        response.sendRedirect("main.jsp");
+        response.sendRedirect("main.jsp?search_input=");
         }
 
 

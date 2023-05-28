@@ -40,9 +40,9 @@
               <div class="list_order" id="listOrder1">
                 <div class="container">
                   <h2 class="tiltle_order">ĐƠN HÀNG</h2>
-                <form action="" class="form_Listorder">
+                 <form  class="form_Listorder">
                   <div class="input_item">
-                    <input type="input" name="search_input" class="form-control">
+                    <input type="input" name="search_input" value="" class="form-control">
                     <i class="bi bi-search"></i>
                   </div>
                 </form>
@@ -58,8 +58,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                        <%  DAO dao = new DAO(); 
-                            List<Donhang> listD = dao.getAllDonhang();
+                        <% 
+                            String a = request.getParameter("search_input");
+                            DAO dao = new DAO(); 
+                            List<Donhang> listD = dao.getDonhang(a);
                             for(Donhang d : listD) {%>
                             <tr onclick="(navigateToLink('loadCT?id=<%=d.getId()%>'))">
                         <th scope="row"><%=d.getId()%></th>
