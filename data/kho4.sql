@@ -1,6 +1,6 @@
 
 -- 1 funtion idNV cuối
-
+  DROP TRIGGER IF EXISTS idKH; 
 DELIMITER //
 
 create FUNCTION maxid_NV()
@@ -22,7 +22,11 @@ CREATE TRIGGER idNV
 BEFORE INSERT ON nhanvien
 FOR EACH ROW
 BEGIN
+	if maxid_nv() is null then 
+    set  NEW.idNV = "NV001";
+    else 
     SET NEW.idNV = concat("NV",LPAD(maxid_NV()+1, 3,0));
+    end if;
 END;
 
 //DELIMITER ;
@@ -50,7 +54,11 @@ CREATE TRIGGER idKH
 BEFORE INSERT ON khachhang
 FOR EACH ROW
 BEGIN
+	if maxid_kh() is null then 
+    set  NEW.idKH = "KH001";
+    else 
     SET NEW.idKH = concat("KH",LPAD(maxid_KH()+1, 3,0));
+    end if;
 END;
 
 //DELIMITER ;

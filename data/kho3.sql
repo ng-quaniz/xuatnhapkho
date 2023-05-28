@@ -172,17 +172,12 @@
  );
  
       insert into nhanvien (idNV,tenNV,sdtNV,cmndNV,emailNV,diachiNV) 
-  values ("NV001","Nguyễn Hồng Quân", "0369743256","123456789","nh@gmail.com","Đà Nẵng"),
-  ("",'Trương Bảo Phúc", "0369743256","123456789","tp@gmail.com","Đà Nẵng"),
+  values ("","Nguyễn Hồng Quân", "0369743256","123456789","nh@gmail.com","Đà Nẵng"),
+  ("","Trương Bảo Phúc", "0369743256","123456789","tp@gmail.com","Đà Nẵng"),
   ("","Lê Na", "0369743256","123456789","n@gmail.com","Đà Nẵng"),
-  ("","Nguyễn Minh Lợi", "0369743256","123456789","nl@gmail.com","Đà Nẵng")
+  ("","Nguyễn Minh Lợi", "0369743256","123456789","nl@gmail.com","Đà Nẵng");
 
-    insert into khachhang (idKH,tenKH,sdtKH,cmndKH,emailKH,diachiKH)
-  values ("KH001","Nguyễn Hồng A", "0369743256","123456789","nhq@gmail.com","Đà Nẵng"),
-  ("","Trương Bảo B", "0369743256","123456789","tbp@gmail.com","Đà Nẵng"),
-  ("","Lê C", "0369743256","123456789","Đà Nẵng","ln@gmail.com"),
-  ("","Nguyễn Minh D", "0369743256","123456789","nml@gmail.com","Đà Nẵng")
- 
+
  
  insert into loaichua(tenLC,giaThanh) 
  values ("Container", 1000000),
@@ -199,42 +194,20 @@
   ("CN", "Công nghiệp"),
   ("NN", "Nông nghiệp"),
   ("PT", "Phương tiện và phụ tùng"),
-  ("TD", "Hàng tiêu dùng")
+  ("TD", "Hàng tiêu dùng");
 
 insert into trangthai (idTT,trangthai)
   values ("CD","Chưa duyệt"),
   ("DD","Đã duyệt"),
   ("NK","Nhập kho"),
-    ("XK","Xuất kho")
+    ("XK","Xuất kho");
     
-    insert into hanghoa (idHH,idLH,idLC,tenHH,cannang,idTT,ghichu)
-values ("","DT","2","Máy tính",1000,"CD",""),
-("","DT","1","Máy tính",1000,"CD",""),
-("","VL","2","Xi măng",1000,"CD",""),
-("","TP","2","Gạo",1000,"CD",""),
-("","CN","3","Máy may",1000,"CD",""),
-("","GD","3","Bàn",1000,"CD",""),
-("","GD","2","Ghế",1000,"CD",""),
-("","PT","1","Ô tô",1000,"CD",""),
-("","NN","4","Phân bón",1000,"CD","")
-
-insert into chitiet (idHH,idKH,idNV,ngaytao)
-values (1,1,1,"2021-05-01 00:00:00"),
-(2,2,2,"2021-05-01 00:00:00"),
-(3,3,3,"2021-05-01 00:00:00"),
-(4,4,4,"2021-05-01 00:00:00"),
-(5,1,1,"2021-05-01 00:00:00"),
-(6,2,2,"2021-05-01 00:00:00"),
-(7,4,3,"2021-05-01 00:00:00"),
-(8,3,4,"2021-05-01 00:00:00"),
-(9,2,1,"2021-05-01 00:00:00"),
-(10,1,2,"2021-05-01 00:00:00")
 
 
 insert into kho (tenKho)
 values ("Ngoài trời A"),
 ("Trong nhà B"),
-("Trong nhà C")
+("Trong nhà C");
 
 
 insert into khu (idkhu,tenkhu,idkho)
@@ -246,13 +219,27 @@ values ("AA","Khu AA",1),
 ("BC","Khu BC",2),
 ("CA","Khu CA",3),
 ("CB","Khu CB",3),
-("CC","Khu CC",3)
+("CC","Khu CC",3);
 
 insert into hinhthuc (idHT,hinhthuc)
 values ("VC","Vận chuyển bộ"),
-("NN","Nhận ngay")
+("NN","Nhận ngay");
 
 
-select idCT, tenHH, tenLH, tenLC, cân nặng
-from chitiet, hanghoa, loaihang, loaichua
-where chitiet.idHH = hanghoa.idHH and hanghoa.idLH = loaihang.idLH and hanghoa.idLC = loaichua.idLC
+    insert into khachhang (idKH,tenKH,sdtKH,cmndKH,emailKH,diachiKH)
+  values ("","Nguyễn Hồng A", "0369743256","123456789","nhq@gmail.com","Đà Nẵng"),
+  ("","Trương Bảo B", "0369743256","123456789","tbp@gmail.com","Đà Nẵng"),
+  ("","Lê C", "0369743256","123456789","Đà Nẵng","ln@gmail.com"),
+  ("","Nguyễn Minh D", "0369743256","123456789","nml@gmail.com","Đà Nẵng");
+ 
+     insert into hanghoa (idHH,idLH,idLC,tenHH,cannang,idTT,ghichu)
+values ("","DT","2","Máy tính",1000,"CD",""),
+("","DT","1","Máy tính",1000,"CD",""),
+("","VL","2","Xi măng",1000,"CD",""),
+("","TP","2","Gạo",1000,"CD",""),
+("","CN","3","Máy may",1000,"CD",""),
+("","GD","3","Bàn",1000,"CD",""),
+("","GD","2","Ghế",1000,"CD",""),
+("","PT","1","Ô tô",1000,"CD",""),
+("","NN","4","Phân bón",1000,"CD","")
+
